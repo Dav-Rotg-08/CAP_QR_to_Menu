@@ -1,0 +1,2 @@
+rootProject.name='QR_to_Menu'
+include ':app'
