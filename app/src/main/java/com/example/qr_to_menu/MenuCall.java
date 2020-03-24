@@ -30,12 +30,13 @@ public class MenuCall extends AppCompatActivity {
 
         Intent intent = getIntent();
         String res_key = intent.getStringExtra("SENT_TEXT");
-        MenuObject newRestaurant = MenuObject_HashTable.allMenus.get(res_key);
+        MenuObject_HashTable temp = new MenuObject_HashTable();
+        //Hashtable<String,MenuObject> table = temp.getAllMenus();
+        //MenuObject newRestaurant = table.get(res_key);
         //String res_name = newRestaurant.getRestaurant();
         restaurant_name.setText(res_key);
-
-        String[] temp = {item1, item2, item3, item4, item5, item6, item7, item8};
-        ArrayAdapter<String> Values = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,temp);
+        String[] items = {item1, item2, item3, item4, item5, item6, item7, item8};
+        ArrayAdapter<String> Values = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,items);
         list.setAdapter(Values);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -45,7 +46,15 @@ public class MenuCall extends AppCompatActivity {
         });
 
 
-
+        ArrayList<String> bk_list = new ArrayList<String>();
+        bk_list.add(item1);
+        bk_list.add(item2);
+        bk_list.add(item3);
+        bk_list.add(item4);
+        bk_list.add(item5);
+        bk_list.add(item6);
+        bk_list.add(item7);
+        bk_list.add(item8);
 
     }
 
@@ -57,6 +66,13 @@ public class MenuCall extends AppCompatActivity {
         String item6 = dishesPricesToString("Chicken Nuggets-Meal", 5.99);
         String item7 = dishesPricesToString("Chicken Fries-Meal", 5.59);
         String item8 = dishesPricesToString("Big Fish Sandwich-Meal", 6.39);
+
+        ArrayList<String> bk_list = new ArrayList<String>();
+
+
+
+
+
 
 
 

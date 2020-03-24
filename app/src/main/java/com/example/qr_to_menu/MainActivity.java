@@ -7,6 +7,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     CodeScanner codeScanner;
     CodeScannerView scannerView;
     TextView resultText;
+    Button registerButton;
     public static final String SENT_TEXT = "com.example.qr_to_menu.SENT_TEXT";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         scannerView = findViewById(R.id.scannerView);
         codeScanner = new CodeScanner(this, scannerView);
         resultText = findViewById(R.id.qr_result);
+        registerButton = (Button) findViewById(R.id.register);
+        registerButton.setVisibility(View.GONE);
 
         codeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
@@ -48,7 +52,14 @@ public class MainActivity extends AppCompatActivity {
                             openMenuCall();
                         }
                         else{
-                            resultText.setText("Sorry, " + result.getText() + " is not Available." );
+                            resultText.setText(result.getText() + " Is not Registered" );
+                            registerButton.setVisibility(View.VISIBLE);
+                            registerButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    openCreateRestaurant();
+                                }
+                            });
                         }
 
                     }
@@ -99,5 +110,10 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("SENT_TEXT",key);
             startActivity(intent);
         }
+
+    public void openCreateRestaurant(){
+        Intent intent = new Intent(this, CreateRestaurant.class);
+        startActivity(intent);
+    }
     }
 
