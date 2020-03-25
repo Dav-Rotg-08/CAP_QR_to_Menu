@@ -2,6 +2,7 @@ package com.example.qr_to_menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,6 +24,7 @@ public class CreateRestaurant extends AppCompatActivity {
     ListView list;
     ArrayList<String> menu;
     ArrayAdapter<String> adapter;
+    Button confirmMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +39,16 @@ public class CreateRestaurant extends AppCompatActivity {
         menu = new ArrayList<String>();
         adapter = new ArrayAdapter<String>(CreateRestaurant.this, android.R.layout.simple_list_item_1, menu);
         list.setAdapter(adapter);
+        confirmMenu = (Button) findViewById(R.id.confirmMenu);
 
         resName.addTextChangedListener(registerMenuTextWatcher);
         dish.addTextChangedListener(registerMenuTextWatcher);
         price.addTextChangedListener(registerMenuTextWatcher);
 
+
         onButtonClick();
+
+
 
     }
 
@@ -77,7 +83,20 @@ public class CreateRestaurant extends AppCompatActivity {
                 String newItem = dishName + " Price: " + dishPrice;
                 menu.add(newItem);
                 adapter.notifyDataSetChanged();
+                final MenuObject newMenu = new MenuObject(resName.getText().toString(),menu);
+                confirmMenu.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(CreateRestaurant.this, MenuCall.class);
+                        intent.putExtra("NEW MENU", newMenu );
+
+                        startActivity(intent);
+                    }
+                });
             }
         });
     }
-}
+
+
+    }
+

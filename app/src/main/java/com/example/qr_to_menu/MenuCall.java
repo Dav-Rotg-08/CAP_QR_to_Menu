@@ -26,17 +26,48 @@ public class MenuCall extends AppCompatActivity {
         setContentView(R.layout.activity_menu_call);
         restaurant_name = findViewById(R.id.restaurant_name);
         list = (ListView) findViewById(R.id.dishesPrices);
-
+        Hashtable<String, MenuObject> allMenus = new Hashtable<String, MenuObject>();
+        ArrayList<String> items = new ArrayList<String>();
+        items.add(item1);
+        items.add(item2);
+        items.add(item3);
+        items.add(item4);
+        items.add(item5);
+        items.add(item6);
+        items.add(item7);
+        items.add(item8);
+        MenuObject bk = new MenuObject("BURGER_KING", items);
+        allMenus.put("BURGER_KING", bk);
+        ArrayList<String> debug = new ArrayList<String>();
+        debug.add("NO MENU");
+        debug.add("NO MENU");
+        debug.add("NO MENU");
+        debug.add("NO MENU");
+        debug.add("NO MENU");
+        MenuObject newRestaurant = new MenuObject("null", debug);
+        allMenus.put("CHIPOTLE", newRestaurant);
 
         Intent intent = getIntent();
-        String res_key = intent.getStringExtra("SENT_TEXT");
-        MenuObject_HashTable temp = new MenuObject_HashTable();
-        //Hashtable<String,MenuObject> table = temp.getAllMenus();
-        //MenuObject newRestaurant = table.get(res_key);
-        //String res_name = newRestaurant.getRestaurant();
-        restaurant_name.setText(res_key);
-        String[] items = {item1, item2, item3, item4, item5, item6, item7, item8};
-        ArrayAdapter<String> Values = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,items);
+        if(intent.getParcelableExtra("NEW MENU") != null) {
+            MenuObject newMenu = intent.getParcelableExtra("NEW MENU");
+            allMenus.put(newMenu.getRestaurant(), newMenu);
+        }
+        else{
+            Toast.makeText(MenuCall.this,"Did Not Receive Menu", Toast.LENGTH_SHORT).show();
+
+        }
+        if(intent.getStringExtra("SENT_TEXT") != null){
+            String res_key = intent.getStringExtra("SENT_TEXT");
+            MenuObject found = allMenus.get(res_key);
+            newRestaurant.setRestaurant(found.getRestaurant());
+            newRestaurant.setDishesPrices(found.getDishesPrices());
+        }
+        String res_name = newRestaurant.getRestaurant();
+        restaurant_name.setText(res_name);
+        //restaurant_name.setText(res_key);
+        //String[] items = {item1, item2, item3, item4, item5, item6, item7, item8};
+        ArrayList<String> menuList = newRestaurant.getDishesPrices();
+        ArrayAdapter<String> Values = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,menuList);
         list.setAdapter(Values);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

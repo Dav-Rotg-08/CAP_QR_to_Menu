@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         resultText.setText(result.getText());
-                        if(resultText.getText().toString().equals("BURGER_KING")){
+                        String hashKey = resultText.getText().toString();
+                        if(hashKey.equals("BURGER_KING")|| hashKey.equals("CHIPOTLE")){
                             openMenuCall();
                         }
                         else{
