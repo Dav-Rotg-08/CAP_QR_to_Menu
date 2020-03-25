@@ -84,15 +84,16 @@ public class CreateRestaurant extends AppCompatActivity {
                 menu.add(newItem);
                 adapter.notifyDataSetChanged();
                 final MenuObject newMenu = new MenuObject(resName.getText().toString(),menu);
-                confirmMenu.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(CreateRestaurant.this, MenuCall.class);
-                        intent.putExtra("NEW MENU", newMenu );
-
-                        startActivity(intent);
-                    }
-                });
+                if(menu != null) {
+                    confirmMenu.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(CreateRestaurant.this, MenuCall.class);
+                            intent.putExtra("NEW_MENU", newMenu);
+                            startActivity(intent);
+                        }
+                    });
+                }
             }
         });
     }

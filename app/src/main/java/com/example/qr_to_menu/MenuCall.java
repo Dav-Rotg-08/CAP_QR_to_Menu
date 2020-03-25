@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Objects;
 import java.util.Stack;
 
 public class MenuCall extends AppCompatActivity {
@@ -48,12 +49,13 @@ public class MenuCall extends AppCompatActivity {
         allMenus.put("CHIPOTLE", newRestaurant);
 
         Intent intent = getIntent();
-        if(intent.getParcelableExtra("NEW MENU") != null) {
-            MenuObject newMenu = intent.getParcelableExtra("NEW MENU");
+        if(intent.getParcelableExtra("NEW_MENU") != null) {
+            MenuObject newMenu = getIntent().getExtras().getParcelable("NEW_MENU");
             allMenus.put(newMenu.getRestaurant(), newMenu);
+
         }
         else{
-            Toast.makeText(MenuCall.this,"Did Not Receive Menu", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MenuCall.this,"Did Not Receive NEW Menu", Toast.LENGTH_SHORT).show();
 
         }
         if(intent.getStringExtra("SENT_TEXT") != null){
