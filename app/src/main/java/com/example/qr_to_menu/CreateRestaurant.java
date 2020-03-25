@@ -3,6 +3,8 @@ package com.example.qr_to_menu;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,9 +38,35 @@ public class CreateRestaurant extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(CreateRestaurant.this, android.R.layout.simple_list_item_1, menu);
         list.setAdapter(adapter);
 
+        resName.addTextChangedListener(registerMenuTextWatcher);
+        dish.addTextChangedListener(registerMenuTextWatcher);
+        price.addTextChangedListener(registerMenuTextWatcher);
+
         onButtonClick();
 
     }
+
+    private TextWatcher registerMenuTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String resInput = resName.getText().toString();
+            String dishInput = dish.getText().toString();
+            String priceInput = price.getText().toString();
+
+            addDish.setClickable(!resInput.isEmpty() && !dishInput.isEmpty() && !priceInput.isEmpty());
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 
     public void onButtonClick(){
         addDish.setOnClickListener(new View.OnClickListener() {
