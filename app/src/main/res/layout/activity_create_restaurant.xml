@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="174dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="179dp"
         android:text="Register"
         android:textSize="24sp"
@@ -24,11 +24,11 @@
         android:id="@+id/resName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Restaurant Name"
         android:layout_marginEnd="96dp"
         android:ems="10"
+        android:hint="Restaurant Name"
         android:inputType="textPersonName"
-        android:imeOptions="actionDone"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header" />
 
@@ -36,13 +36,13 @@
         android:id="@+id/dish1"
         android:layout_width="119dp"
         android:layout_height="37dp"
-        android:hint="Dish Name"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="228dp"
         android:ems="10"
+        android:hint="Dish Name"
+
         android:inputType="textPersonName"
         android:textSize="14sp"
-        android:imeOptions="actionDone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resName" />
 
@@ -50,38 +50,30 @@
         android:id="@+id/addDishes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="53dp"
         android:clickable="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dish1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/confirmMenu"
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <EditText
         android:id="@+id/price"
         android:layout_width="183dp"
         android:layout_height="41dp"
-        android:hint="Price"
         android:layout_marginStart="28dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="37dp"
         android:ems="10"
+        android:hint="Price"
         android:inputType="number"
         android:textSize="14sp"
-        android:imeOptions="actionDone"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.65"
         app:layout_constraintStart_toEndOf="@+id/dish1"
         app:layout_constraintTop_toBottomOf="@+id/resName"
         tools:text="0.00" />
-
-    <ListView
-        android:id="@+id/menu"
-        android:layout_width="378dp"
-        android:layout_height="300dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="26dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addDishes" />
 
     <Button
         android:id="@+id/confirmMenu"
@@ -92,5 +84,30 @@
         android:text="Confirm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/addDishes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/price">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/menuRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:scrollbars="vertical" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

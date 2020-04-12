@@ -3,34 +3,19 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Stack;
 
 public class MenuObject implements Parcelable {
-    private ArrayList<String> dishesPrices;
+    private ArrayList<Dish> dishesPrices;
     private String restaurant;
 
-
-    public MenuObject(String restaurant, ArrayList<String> dishesPrices){
+    MenuObject(String restaurant) {
         this.restaurant = restaurant;
-        this.dishesPrices = dishesPrices;
-
+        this.dishesPrices = new ArrayList<>();
     }
 
-    protected MenuObject(Parcel in) {
-        dishesPrices = in.createStringArrayList();
+    private MenuObject(Parcel in) {
+        dishesPrices = in.createTypedArrayList(Dish.CREATOR);
         restaurant = in.readString();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeStringList(dishesPrices);
-        dest.writeString(restaurant);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
     }
 
     public static final Creator<MenuObject> CREATOR = new Creator<MenuObject>() {
@@ -45,26 +30,34 @@ public class MenuObject implements Parcelable {
         }
     };
 
-    public String getRestaurant() {
+    String getRestaurant() {
         return restaurant;
     }
 
-    public void setRestaurant(String restaurant) {
+    void setRestaurant(String restaurant) {
         this.restaurant = restaurant;
     }
 
-    public ArrayList<String> getDishesPrices(){
+    ArrayList<Dish> getDishesPrices() {
         return dishesPrices;
     }
 
-    public void setDishesPrices(ArrayList<String> dishesPrices){
+    void setDishesPrices(ArrayList<Dish> dishesPrices) {
         this.dishesPrices = dishesPrices;
     }
 
-    public String dishesPricesToString(String a, double b){
-        String combine = a + b;
-        return combine;
-
+    public String dishesPricesToString(String a, double b) {
+        return a + b;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeTypedList(dishesPrices);
+        parcel.writeString(restaurant);
+    }
 }

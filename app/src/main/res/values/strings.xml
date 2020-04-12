@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">QR_to_Menu</string>
+    <string name="is_not_registered">\" Is not Registered\"</string>
+    <string-array name="Filters">
+        <item>None</item>
+        <item>Vegan</item>
+        <item>Spicy</item>
+        <item>Sugar</item>
+        <item>Gluten</item>
+        <item>Halal</item>
+        <item>Cashrut</item>
+        <item>Alcohol</item>
+        <item>SeaFood</item>
+    </string-array>
 </resources>
